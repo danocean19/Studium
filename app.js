@@ -369,6 +369,25 @@ function syncTopbarProfile() {
   }
 }
 
+function syncMobileNavLabels() {
+  const isMobile = window.matchMedia("(max-width: 720px)").matches;
+  const labels = {
+    dashboard: { mobile: "Inicio", desktop: "Dashboard" },
+    subjects: { mobile: "Materias", desktop: "Disciplinas" },
+    agenda: { mobile: "Planos", desktop: "Agenda" },
+    profile: { mobile: "Perfil", desktop: "Perfil" },
+    settings: { mobile: "Config.", desktop: "Configurações" }
+  };
+
+  elements.navItems.forEach((item) => {
+    const config = labels[item.dataset.screen];
+    if (!config) return;
+    const label = item.querySelector(".nav-label");
+    if (!label) return;
+    label.textContent = isMobile ? config.mobile : config.desktop;
+  });
+}
+
 function populateSubjectOptions() {
   const subjectOptions = state.subjects.map((subject) => `<option value="${subject.id}">${subject.name}</option>`).join("");
   const withEmpty = `<option value="">Sem disciplina</option>${subjectOptions}`;
@@ -405,6 +424,7 @@ function setActiveScreen(screen) {
   elements.screenTitle.textContent = labels[screen][1];
   elements.topbarKicker.textContent = labels[screen][0];
   elements.topbarSubtitle.textContent = labels[screen][2];
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 function renderMetrics() {
@@ -1196,6 +1216,7 @@ function renderAll() {
   renderProfile();
   renderSettings();
   syncTopbarProfile();
+  syncMobileNavLabels();
   toggleOnboarding();
 }
 

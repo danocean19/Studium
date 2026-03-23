@@ -738,6 +738,22 @@ body[data-theme="dark"] .ring-inner { background: rgba(10, 18, 31, 0.72); }
   .nav-label-mobile { display: block; }
   .nav-item-tasks,
   .nav-item-stats { display: none; }
+  .nav-item::after {
+    display: none;
+  }
+  .nav-item:hover::after,
+  .nav-item:focus-visible::after {
+    animation: none;
+    opacity: 0;
+  }
+  .nav-item:hover,
+  .nav-item:focus-visible {
+    transform: translateY(-1px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.55), 0 10px 18px rgba(23, 45, 78, 0.12);
+  }
+  .nav-item.is-active {
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.62), 0 12px 22px rgba(75, 134, 245, 0.16);
+  }
   .nav-item-hub { order: 3; }
   .nav-item[data-screen="dashboard"] { order: 1; }
   .nav-item[data-screen="subjects"] { order: 2; }

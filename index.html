@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Studium | Gestão Estudantil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-bg" aria-hidden="true">
+    <span class="glass-orb orb-a"></span>
+    <span class="glass-orb orb-b"></span>
+    <span class="glass-orb orb-c"></span>
+  </div>
+
+  <main class="experience">
+    <section class="dashboard-shell">
+      <aside class="glass-panel sidebar">
+        <div class="brand-block">
+          <p class="eyebrow">Painel pessoal</p>
+          <h2>Studium</h2>
+          <p class="supporting">Organização acadêmica, foco e acompanhamento em um só lugar.</p>
+        </div>
+
+        <nav class="nav-stack" aria-label="Seções do sistema">
+          <button class="nav-item is-active" data-screen="dashboard" type="button"><span class="nav-icon" aria-hidden="true">⌂</span><span class="nav-label">Dashboard</span></button>
+          <button class="nav-item" data-screen="subjects" type="button"><span class="nav-icon" aria-hidden="true">◫</span><span class="nav-label">Disciplinas</span></button>
+          <button class="nav-item nav-item-hub" data-screen="agenda" type="button"><span class="nav-icon" aria-hidden="true">◷</span><span class="nav-label nav-label-desktop">Agenda</span><span class="nav-label nav-label-mobile">Planos</span></button>
+          <button class="nav-item nav-item-tasks" data-screen="tasks" type="button"><span class="nav-icon" aria-hidden="true">✓</span><span class="nav-label">Tarefas</span></button>
+          <button class="nav-item nav-item-stats" data-screen="stats" type="button"><span class="nav-icon" aria-hidden="true">▤</span><span class="nav-label">Estatísticas</span></button>
+          <button class="nav-item" data-screen="profile" type="button"><span class="nav-icon" aria-hidden="true">◎</span><span class="nav-label">Perfil</span></button>
+          <button class="nav-item" data-screen="settings" type="button"><span class="nav-icon" aria-hidden="true">◉</span><span class="nav-label">Configurações</span></button>
+        </nav>
+      </aside>
+
+      <div class="main-panel">
+        <header class="glass-panel topbar">
+          <div>
+            <p class="eyebrow" id="topbar-kicker">Visão geral</p>
+            <h1 id="screen-title">Dashboard</h1>
+          </div>
+
+          <div class="topbar-profile">
+            <div class="theme-toggle" id="theme-toggle" aria-label="Alternar tema">
+              <button class="theme-option" data-theme-choice="light" type="button" aria-label="Modo claro">☼</button>
+              <button class="theme-option" data-theme-choice="dark" type="button" aria-label="Modo escuro">◐</button>
+            </div>
+            <div class="topbar-copy">
+              <strong id="welcome-label">Olá, estudante</strong>
+              <span id="topbar-subtitle">Seu semestre em ritmo constante.</span>
+            </div>
+            <div class="avatar-badge" id="topbar-avatar" aria-hidden="true">S</div>
+          </div>
+        </header>
+
+        <section class="screen is-active" id="screen-dashboard">
+          <div class="page-grid">
+            <section class="hero-grid" id="dashboard-metrics"></section>
+            <section class="glass-card section-card">
+              <div class="section-head"><div><span class="mini-label">Alertas internos</span><h3>O que precisa de atenção</h3></div></div>
+              <div class="alert-stack" id="alert-list"></div>
+            </section>
+            <section class="dashboard-columns">
+              <article class="glass-card section-card">
+                <div class="section-head"><div><span class="mini-label">Próximas tarefas</span><h3>Entregas mais urgentes</h3></div></div>
+                <div id="dashboard-task-list" class="stack-list"></div>
+              </article>
+              <article class="glass-card section-card">
+                <div class="section-head"><div><span class="mini-label">Próximos eventos</span><h3>Agenda acadêmica</h3></div></div>
+                <div id="dashboard-event-list" class="stack-list"></div>
+              </article>
+            </section>
+            <section class="dashboard-columns">
+              <article class="glass-card section-card">
+                <div class="section-head"><div><span class="mini-label">Pomodoro</span><h3>Gestão de estudos</h3></div></div>
+                <div class="timer-panel">
+                  <div class="timer-value" id="study-timer">25:00</div>
+                  <div class="timer-actions">
+                    <select id="study-subject-select" class="glass-input"></select>
+                    <button id="timer-toggle" class="glass-button primary-button" type="button">Iniciar</button>
+                    <button id="timer-reset" class="glass-button secondary-button" type="button">Resetar</button>
+                  </div>
+                  <p class="supporting">Sessões concluídas entram automaticamente no histórico local.</p>
+                  <div id="study-history-preview" class="stack-list compact-list"></div>
+                </div>
+              </article>
+              <article class="glass-card section-card">
+                <div class="section-head"><div><span class="mini-label">Resumo rápido</span><h3>Ritmo da semana</h3></div></div>
+                <div class="summary-grid" id="weekly-summary"></div>
+              </article>
+            </section>
+          </div>
+        </section>
+
+        <section class="screen" id="screen-subjects">
+          <div class="page-grid">
+            <section class="glass-card section-card">
+              <div class="section-head"><div><span class="mini-label">Nova disciplina</span><h3>Cadastro acadêmico</h3></div></div>
+              <form id="subject-form" class="form-grid">
+                <input type="hidden" id="subject-id">
+                <label><span>Nome</span><input id="subject-name" class="glass-input" type="text" required></label>
+                <label><span>Professor</span><input id="subject-professor" class="glass-input" type="text" required></label>
+                <label><span>Cor</span><input id="subject-color" class="glass-input color-input" type="color" value="#4b86f5"></label>
+                <label><span>Frequência (%)</span><input id="subject-attendance" class="glass-input" type="number" min="0" max="100" step="1" placeholder="Opcional"></label>
+                <label class="field-span-2"><span>Anotações</span><textarea id="subject-notes" class="glass-input" rows="4" placeholder="Resumo de aulas, links úteis, observações..."></textarea></label>
+                <div class="field-span-2 form-actions">
+                  <button class="glass-button primary-button" type="submit">Salvar disciplina</button>
+                  <button class="glass-button secondary-button" id="subject-form-reset" type="button">Limpar</button>
+                </div>
+              </form>
+            </section>
+            <section class="content-split">
+              <article class="glass-card section-card">
+                <div class="section-head"><div><span class="mini-label">Disciplinas</span><h3>Seu semestre</h3></div></div>
+                <div id="subject-list" class="subject-grid"></div>
+              </article>
+              <article class="glass-card section-card detail-card">
+                <div class="section-head"><div><span class="mini-label">Detalhes</span><h3 id="subject-detail-title">Selecione uma disciplina</h3></div></div>
+                <div id="subject-detail" class="detail-content empty-state">Escolha uma disciplina para ver notas, frequência, links e anotações.</div>
+              </article>
+            </section>
+          </div>
+        </section>
+
+        <section class="screen" id="screen-agenda">
+          <div class="page-grid">
+            <div class="mobile-section-switch" aria-label="Alternar entre agenda, tarefas e estatísticas">
+              <button class="mobile-section-button is-active" data-mobile-hub-screen="agenda" type="button">Agenda</button>
+              <button class="mobile-section-button" data-mobile-hub-screen="tasks" type="button">Tarefas</button>
+              <button class="mobile-section-button" data-mobile-hub-screen="stats" type="button">Stats</button>
+            </div>
+            <section class="glass-card section-card">
+              <div class="section-head">
+                <div><span class="mini-label">Novo evento</span><h3>Agenda acadêmica</h3></div>
+                <div class="calendar-nav">
+                  <button id="calendar-prev" class="glass-button icon-button" type="button">←</button>
+                  <strong id="calendar-title"></strong>
+                  <button id="calendar-next" class="glass-button icon-button" type="button">→</button>
+                </div>
+              </div>
+              <form id="event-form" class="form-grid">
+                <input type="hidden" id="event-id">
+                <label><span>Título</span><input id="event-title" class="glass-input" type="text" required></label>
+                <label><span>Tipo</span><select id="event-type" class="glass-input"><option value="Prova">Prova</option><option value="Trabalho">Trabalho</option><option value="Aula">Aula</option><option value="Estudo">Estudo</option></select></label>
+                <label><span>Data e hora</span><input id="event-date" class="glass-input" type="datetime-local" required></label>
+                <label><span>Disciplina</span><select id="event-subject" class="glass-input"></select></label>
+                <div class="field-span-2 form-actions">
+                  <button class="glass-button primary-button" type="submit">Salvar evento</button>
+                  <button class="glass-button secondary-button" id="event-form-reset" type="button">Limpar</button>
+                </div>
+              </form>
+            </section>
+            <section class="content-split">
+              <article class="glass-card section-card">
+                <div class="calendar-grid calendar-weekdays" id="calendar-weekdays"></div>
+                <div class="calendar-grid calendar-days" id="calendar-grid"></div>
+              </article>
+              <article class="glass-card section-card">
+                <div class="section-head"><div><span class="mini-label">Eventos próximos</span><h3>Próximos compromissos</h3></div></div>
+                <div id="event-list" class="stack-list"></div>
+              </article>
+            </section>
+          </div>
+        </section>
+
+        <section class="screen" id="screen-tasks">
+          <div class="page-grid">
+            <div class="mobile-section-switch" aria-label="Alternar entre agenda, tarefas e estatísticas">
+              <button class="mobile-section-button" data-mobile-hub-screen="agenda" type="button">Agenda</button>
+              <button class="mobile-section-button is-active" data-mobile-hub-screen="tasks" type="button">Tarefas</button>
+              <button class="mobile-section-button" data-mobile-hub-screen="stats" type="button">Stats</button>
+            </div>
+            <section class="glass-card section-card">
+              <div class="section-head"><div><span class="mini-label">Nova tarefa</span><h3>To-do acadêmico</h3></div></div>
+              <form id="task-form" class="form-grid">
+                <input type="hidden" id="task-id">
+                <label><span>Título</span><input id="task-title" class="glass-input" type="text" required></label>
+                <label><span>Entrega</span><input id="task-due-date" class="glass-input" type="datetime-local" required></label>
+                <label><span>Prioridade</span><select id="task-priority" class="glass-input"><option value="high">Alta</option><option value="medium">Média</option><option value="low">Baixa</option></select></label>
+                <label><span>Disciplina</span><select id="task-subject" class="glass-input"></select></label>
+                <label><span>Status</span><select id="task-status" class="glass-input"><option value="pending">Pendente</option><option value="done">Concluída</option></select></label>
+                <label class="field-span-2"><span>Descrição</span><textarea id="task-description" class="glass-input" rows="4"></textarea></label>
+                <div class="field-span-2 form-actions">
+                  <button class="glass-button primary-button" type="submit">Salvar tarefa</button>
+                  <button class="glass-button secondary-button" id="task-form-reset" type="button">Limpar</button>
+                </div>
+              </form>
+            </section>
+            <section class="glass-card section-card">
+              <div class="section-head"><div><span class="mini-label">Filtro</span><h3>Organização das entregas</h3></div></div>
+              <div class="toolbar">
+                <select id="task-filter-status" class="glass-input toolbar-control"></select>
+                <select id="task-filter-subject" class="glass-input toolbar-control"></select>
+                <select id="task-sort" class="glass-input toolbar-control"><option value="due-asc">Prazo mais próximo</option><option value="due-desc">Prazo mais distante</option><option value="priority">Maior prioridade</option></select>
+              </div>
+              <div id="task-list" class="stack-list"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="screen" id="screen-stats">
+          <div class="page-grid">
+            <div class="mobile-section-switch" aria-label="Alternar entre agenda, tarefas e estatísticas">
+              <button class="mobile-section-button" data-mobile-hub-screen="agenda" type="button">Agenda</button>
+              <button class="mobile-section-button" data-mobile-hub-screen="tasks" type="button">Tarefas</button>
+              <button class="mobile-section-button is-active" data-mobile-hub-screen="stats" type="button">Stats</button>
+            </div>
+            <section class="hero-grid" id="stats-metrics"></section>
+            <section class="dashboard-columns">
+              <article class="glass-card section-card">
+                <div class="section-head"><div><span class="mini-label">Tempo por disciplina</span><h3>Foco semanal</h3></div></div>
+                <div id="study-chart" class="chart-list"></div>
+              </article>
+              <article class="glass-card section-card">
+                <div class="section-head"><div><span class="mini-label">Média por disciplina</span><h3>Desempenho acadêmico</h3></div></div>
+                <div id="grade-chart" class="chart-list"></div>
+              </article>
+            </section>
+            <section class="dashboard-columns">
+              <article class="glass-card section-card">
+                <div class="section-head"><div><span class="mini-label">Produtividade</span><h3>Tarefas concluídas vs pendentes</h3></div></div>
+                <div id="task-chart" class="task-chart"></div>
+              </article>
+              <article class="glass-card section-card">
+                <div class="section-head"><div><span class="mini-label">Histórico</span><h3>Sessões registradas</h3></div></div>
+                <div id="study-session-list" class="stack-list compact-list"></div>
+              </article>
+            </section>
+          </div>
+        </section>
+
+        <section class="screen" id="screen-profile">
+          <div class="page-grid">
+            <section class="content-split profile-layout">
+              <article class="glass-card section-card">
+                <div class="section-head"><div><span class="mini-label">Perfil acadêmico</span><h3>Dados do estudante</h3></div></div>
+                <form id="profile-form" class="form-grid">
+                  <label><span>Nome</span><input id="profile-name" class="glass-input" type="text" required></label>
+                  <label><span>Curso</span><input id="profile-course" class="glass-input" type="text" required></label>
+                  <label class="field-span-2"><span>Universidade</span><input id="profile-university" class="glass-input" type="text" required></label>
+                  <label class="field-span-2"><span>Foto</span><input id="profile-photo" class="glass-input" type="file" accept="image/*"></label>
+                  <div class="field-span-2 form-actions profile-actions">
+                    <button class="glass-button primary-button" type="submit">Salvar perfil</button>
+                    <button id="share-profile" class="glass-button secondary-button" type="button">Compartilhar perfil</button>
+                  </div>
+                </form>
+              </article>
+
+              <article class="glass-card section-card">
+                <div class="section-head"><div><span class="mini-label">Preview</span><h3>Cartão do perfil</h3></div></div>
+                <div id="profile-preview" class="profile-preview-card"></div>
+              </article>
+            </section>
+
+            <section class="glass-card section-card">
+              <div class="section-head"><div><span class="mini-label">Matrículas</span><h3>Matérias cursadas</h3></div></div>
+              <div id="profile-subjects" class="subject-tags"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="screen" id="screen-settings">
+          <div class="page-grid">
+            <section class="glass-card section-card">
+              <div class="section-head"><div><span class="mini-label">Preferências</span><h3>Configurações gerais</h3></div></div>
+              <div class="settings-grid">
+                <article class="glass-tile">
+                  <span class="mini-label">Tema</span>
+                  <h4>Modo escuro</h4>
+                  <p class="supporting">Ative ou desative o tema escuro com persistência local.</p>
+                  <button id="settings-theme-toggle" class="glass-button secondary-button" type="button">Alternar tema</button>
+                </article>
+                <article class="glass-tile">
+                  <span class="mini-label">Semestre</span>
+                  <h4>Período letivo</h4>
+                  <form id="semester-form" class="form-grid compact-form">
+                    <label><span>Início</span><input id="semester-start" class="glass-input" type="date"></label>
+                    <label><span>Fim</span><input id="semester-end" class="glass-input" type="date"></label>
+                    <div class="field-span-2"><button class="glass-button primary-button" type="submit">Salvar semestre</button></div>
+                  </form>
+                </article>
+                <article class="glass-tile">
+                  <span class="mini-label">Backup</span>
+                  <h4>Exportar ou importar</h4>
+                  <p class="supporting">Gere um JSON com todos os dados ou importe um backup anterior.</p>
+                  <div class="form-actions">
+                    <button id="export-data" class="glass-button primary-button" type="button">Exportar JSON</button>
+                    <label class="glass-button secondary-button file-button">Importar JSON<input id="import-data" type="file" accept="application/json"></label>
+                  </div>
+                </article>
+                <article class="glass-tile danger-tile">
+                  <span class="mini-label">Reset</span>
+                  <h4>Limpar todos os dados</h4>
+                  <p class="supporting">Remove disciplinas, tarefas, eventos e histórico do navegador.</p>
+                  <button id="reset-data" class="glass-button danger-button" type="button">Apagar tudo</button>
+                </article>
+              </div>
+            </section>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <div id="onboarding-modal" class="onboarding-modal" hidden>
+    <div class="glass-card onboarding-card">
+      <span class="mini-label">Boas-vindas</span>
+      <h2>Monte seu espaço acadêmico</h2>
+      <p class="supporting">Preencha seu perfil inicial para personalizar o Studium.</p>
+      <form id="onboarding-form" class="form-grid">
+        <label><span>Nome</span><input id="onboarding-name" class="glass-input" type="text" required></label>
+        <label><span>Curso</span><input id="onboarding-course" class="glass-input" type="text" required></label>
+        <label class="field-span-2"><span>Universidade</span><input id="onboarding-university" class="glass-input" type="text" required></label>
+        <div class="field-span-2 form-actions">
+          <button class="glass-button primary-button" type="submit">Entrar no painel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

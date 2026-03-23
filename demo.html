@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UI Kit Liquid Glass</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="ui-kit.css">
+</head>
+<body>
+  <div class="app-bg">
+    <span class="glass-orb orb-a"></span>
+    <span class="glass-orb orb-b"></span>
+    <span class="glass-orb orb-c"></span>
+  </div>
+
+  <main class="experience">
+    <section class="dashboard" id="dashboard">
+      <aside class="glass-panel sidebar">
+        <div class="brand-block">
+          <p class="eyebrow">UI Kit</p>
+          <h2>Liquid Glass</h2>
+        </div>
+
+        <nav class="nav-stack">
+          <button class="nav-item is-active" data-screen="home" type="button">
+            <span class="nav-icon" aria-hidden="true">⌂</span>
+            <span class="nav-label">Home</span>
+          </button>
+          <button class="nav-item nav-item-finance" data-screen="accounts" type="button">
+            <span class="nav-icon" aria-hidden="true">◫</span>
+            <span class="nav-label nav-label-desktop">Contas</span>
+            <span class="nav-label nav-label-mobile">Finanças</span>
+          </button>
+          <button class="nav-item nav-item-income" data-screen="income" type="button">
+            <span class="nav-icon" aria-hidden="true">↗</span>
+            <span class="nav-label">Rendas</span>
+          </button>
+          <button class="nav-item" data-screen="expenses" type="button">
+            <span class="nav-icon" aria-hidden="true">↘</span>
+            <span class="nav-label">Gastos</span>
+          </button>
+          <button class="nav-item" data-screen="reports" type="button">
+            <span class="nav-icon" aria-hidden="true">◔</span>
+            <span class="nav-label">Relatórios</span>
+          </button>
+          <button class="nav-item" data-screen="profile" type="button">
+            <span class="nav-icon" aria-hidden="true">◎</span>
+            <span class="nav-label">Perfil</span>
+          </button>
+        </nav>
+      </aside>
+
+      <div class="main-panel">
+        <header class="glass-panel topbar">
+          <div>
+            <p class="eyebrow">Kit base</p>
+            <h1 id="screen-title">Home</h1>
+          </div>
+
+          <div class="topbar-profile">
+            <div class="theme-toggle" id="theme-toggle" aria-label="Alternar tema">
+              <button class="theme-option" data-theme-choice="light" type="button" aria-label="Modo claro">☼</button>
+              <button class="theme-option" data-theme-choice="dark" type="button" aria-label="Modo escuro">◐</button>
+            </div>
+            <div class="topbar-copy">
+              <strong>UI Reutilizável</strong>
+              <span>Sistema visual extraído</span>
+            </div>
+            <img alt="Avatar" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 160'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%237EA8FF'/%3E%3Cstop offset='1' stop-color='%2380F0E2'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='160' height='160' rx='80' fill='url(%23g)'/%3E%3Ccircle cx='80' cy='58' r='30' fill='rgba(255,255,255,0.88)'/%3E%3Cpath d='M30 136c10-25 29-38 50-38s40 13 50 38' fill='rgba(255,255,255,0.88)'/%3E%3C/svg%3E">
+          </div>
+        </header>
+
+        <section class="screen is-active" id="screen-home">
+          <div class="hero-grid">
+            <article class="glass-card metric-card accent-card">
+              <span class="mini-label">Saldo atual</span>
+              <strong>R$ 18.320,00</strong>
+              <p>Card de destaque para dashboard.</p>
+            </article>
+            <article class="glass-card metric-card">
+              <span class="mini-label">Receitas</span>
+              <strong>R$ 7.800,00</strong>
+              <p>Tipografia e espaçamento de apoio.</p>
+            </article>
+            <article class="glass-card metric-card">
+              <span class="mini-label">Gastos</span>
+              <strong>R$ 3.200,00</strong>
+              <p>Superfície reutilizável com efeito glass.</p>
+            </article>
+            <article class="glass-card metric-card">
+              <span class="mini-label">Resumo</span>
+              <strong>R$ 1.180,00</strong>
+              <p>Comportamento responsivo incluso.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="screen" id="screen-accounts">
+          <div class="mobile-finance-switch" aria-label="Alternar entre contas e rendas">
+            <button class="finance-switch-button is-active" data-finance-screen="accounts" type="button">Contas</button>
+            <button class="finance-switch-button" data-finance-screen="income" type="button">Rendas</button>
+          </div>
+          <article class="glass-card panel-card">
+            <div class="panel-head">
+              <div>
+                <span class="mini-label">Contas</span>
+                <h3>Tela de Contas</h3>
+              </div>
+            </div>
+            <p class="supporting">Use este slot para o conteúdo da tela de contas.</p>
+          </article>
+        </section>
+
+        <section class="screen" id="screen-income">
+          <div class="mobile-finance-switch" aria-label="Alternar entre contas e rendas">
+            <button class="finance-switch-button" data-finance-screen="accounts" type="button">Contas</button>
+            <button class="finance-switch-button is-active" data-finance-screen="income" type="button">Rendas</button>
+          </div>
+          <article class="glass-card panel-card">
+            <div class="panel-head">
+              <div>
+                <span class="mini-label">Rendas</span>
+                <h3>Tela de Rendas</h3>
+              </div>
+            </div>
+            <p class="supporting">Use este slot para o conteúdo da tela de rendas.</p>
+          </article>
+        </section>
+
+        <section class="screen" id="screen-expenses">
+          <article class="glass-card panel-card">
+            <div class="panel-head">
+              <div>
+                <span class="mini-label">Gastos</span>
+                <h3>Tela de Gastos</h3>
+              </div>
+            </div>
+            <p class="supporting">Layout base para formulários e listas de gastos.</p>
+          </article>
+        </section>
+
+        <section class="screen" id="screen-reports">
+          <article class="glass-card panel-card">
+            <div class="panel-head">
+              <div>
+                <span class="mini-label">Relatórios</span>
+                <h3>Tela de Relatórios</h3>
+              </div>
+            </div>
+            <p class="supporting">Estrutura para gráficos e análises.</p>
+          </article>
+        </section>
+
+        <section class="screen" id="screen-profile">
+          <article class="glass-card panel-card">
+            <div class="panel-head">
+              <div>
+                <span class="mini-label">Perfil</span>
+                <h3>Tela de Perfil</h3>
+              </div>
+            </div>
+            <p class="supporting">O seletor de tema aparece apenas em Home e Perfil.</p>
+          </article>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script src="ui-kit.js"></script>
+</body>
+</html>

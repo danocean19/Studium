@@ -1462,3 +1462,19 @@ window.addEventListener("appinstalled", () => {
   pwa.deferredPrompt = null;
   updateInstallButtonVisibility();
 });
+(function () {
+  function isAppInstalled() {
+    return window.matchMedia('(display-mode: standalone)').matches
+      || window.navigator.standalone === true;
+  }
+
+  const btn = document.getElementById('installBtn');
+
+  if (btn && isAppInstalled()) {
+    btn.style.display = 'none';
+  }
+
+  window.addEventListener('appinstalled', () => {
+    if (btn) btn.style.display = 'none';
+  });
+})();

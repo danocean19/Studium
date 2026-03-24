@@ -180,6 +180,10 @@ const app = {
   timerInterval: null
 };
 
+const pwa = {
+  deferredPrompt: null
+};
+
 const elements = {
   navItems: document.querySelectorAll(".nav-item"),
   screens: document.querySelectorAll(".screen"),
@@ -188,6 +192,7 @@ const elements = {
   topbarSubtitle: document.querySelector("#topbar-subtitle"),
   welcomeLabel: document.querySelector("#welcome-label"),
   topbarAvatar: document.querySelector("#topbar-avatar"),
+  installAppButton: document.querySelector("#install-app-button"),
   themeChoices: document.querySelectorAll("[data-theme-choice]"),
   themeToggleButton: document.querySelector("#settings-theme-toggle"),
   dashboardMetrics: document.querySelector("#dashboard-metrics"),
@@ -265,6 +270,25 @@ const elements = {
 
 function saveState() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+function isStandaloneApp() {
+  return window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+}
+
+function updateInstallButtonVisibility() {
+  if (!elements.installAppButton) return;
+  elements.installAppButton.hidden = !pwa.deferredPrompt || isStandaloneApp();
+}
+
+async function registerServiceWorker() {
+  if (!("serviceWorker" in navigator) || window.location.protocol === "file:") return;
+
+  try {
+    await navigator.serviceWorker.register("./service-worker.js");
+  } catch (error) {
+    console.error("Erro ao registrar o service worker:", error);
+  }
 }
 
 function subjectById(subjectId) {
@@ -1226,6 +1250,14 @@ document.querySelectorAll("[data-mobile-hub-screen]").forEach((button) => {
 });
 elements.themeChoices.forEach((button) => button.addEventListener("click", () => applyTheme(button.dataset.themeChoice)));
 elements.themeToggleButton.addEventListener("click", () => applyTheme(state.settings.theme === "dark" ? "light" : "dark"));
+elements.installAppButton?.addEventListener("click", async () => {
+  if (!pwa.deferredPrompt) return;
+
+  pwa.deferredPrompt.prompt();
+  await pwa.deferredPrompt.userChoice;
+  pwa.deferredPrompt = null;
+  updateInstallButtonVisibility();
+});
 
 elements.profileForm.addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -1417,3 +1449,16 @@ elements.resetData.addEventListener("click", () => {
 applyTheme(state.settings.theme);
 setActiveScreen(app.activeScreen);
 renderAll();
+updateInstallButtonVisibility();
+registerServiceWorker();
+
+window.addEventListener("beforeinstallprompt", (event) => {
+  event.preventDefault();
+  pwa.deferredPrompt = event;
+  updateInstallButtonVisibility();
+});
+
+window.addEventListener("appinstalled", () => {
+  pwa.deferredPrompt = null;
+  updateInstallButtonVisibility();
+});

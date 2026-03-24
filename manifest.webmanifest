@@ -1,0 +1,20 @@
+{
+  "name": "Studium",
+  "short_name": "Studium",
+  "description": "Painel acadêmico instalável para organizar disciplinas, tarefas e estudos.",
+  "lang": "pt-BR",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#eff5ff",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

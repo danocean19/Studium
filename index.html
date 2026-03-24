@@ -4,6 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Studium | Gestão Estudantil</title>
+  <meta name="theme-color" content="#0f172a">
+  <meta name="description" content="Studium, painel acadêmico instalável para organização de disciplinas, tarefas e estudos.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Studium">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -44,6 +52,7 @@
           </div>
 
           <div class="topbar-profile">
+            <button id="install-app-button" class="glass-button secondary-button install-app-button" type="button" hidden>Instalar app</button>
             <div class="theme-toggle" id="theme-toggle" aria-label="Alternar tema">
               <button class="theme-option" data-theme-choice="light" type="button" aria-label="Modo claro">☼</button>
               <button class="theme-option" data-theme-choice="dark" type="button" aria-label="Modo escuro">◐</button>

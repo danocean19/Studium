@@ -222,7 +222,13 @@ h1, h2, h3, h4, strong { font-family: "Space Grotesk", sans-serif; letter-spacin
 }
 
 .topbar-profile, .topbar-copy { display: flex; align-items: center; gap: var(--space-3); }
-.topbar-profile { margin-left: auto; }
+.topbar-profile { margin-left: auto; flex-wrap: wrap; justify-content: flex-end; }
+
+.install-app-button {
+  min-height: 42px;
+  padding-inline: 1rem;
+  white-space: nowrap;
+}
 
 .avatar-badge {
   display: grid;
@@ -770,6 +776,11 @@ body[data-theme="dark"] .ring-inner { background: rgba(10, 18, 31, 0.72); }
   .topbar .eyebrow, .topbar-copy span { display: none; }
   .topbar h1 { font-size: 1.2rem; }
   .topbar-profile { gap: 0.5rem; }
+  .install-app-button {
+    min-height: 40px;
+    padding: 0.7rem 0.9rem;
+    font-size: 0.82rem;
+  }
   .topbar-copy strong {
     max-width: 92px;
     display: block;
